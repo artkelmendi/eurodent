@@ -1,26 +1,250 @@
 @import "tailwindcss";
 
+/* ============================================================
+   EuroDent — Design System
+   Premium dental practice. Deep teal + warm gold on porcelain.
+   ============================================================ */
+
+@theme {
+  /* Brand teal scale */
+  --color-brand-50: #ecfeff;
+  --color-brand-100: #d2f8fb;
+  --color-brand-200: #a8eef4;
+  --color-brand-300: #6fdfe9;
+  --color-brand-400: #2fc6d6;
+  --color-brand-500: #12a7bb;
+  --color-brand-600: #0c869b;
+  --color-brand-700: #106a7d;
+  --color-brand-800: #155767;
+  --color-brand-900: #103f4c;
+
+  /* Deep ink (text + dark sections) */
+  --color-ink: #062a33;
+  --color-ink-soft: #2c4d56;
+  --color-ink-muted: #5b757d;
+
+  /* Surfaces */
+  --color-porcelain: #f4fafb;
+  --color-cream: #fbfdfd;
+  --color-deep: #062a33;
+  --color-deep-2: #0a3a45;
+
+  /* Accents */
+  --color-gold: #f2b84b;
+  --color-gold-soft: #f8d68c;
+  --color-mint: #5ee7d0;
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --shadow-soft: 0 1px 2px rgba(6, 42, 51, 0.04), 0 12px 30px -12px rgba(6, 42, 51, 0.18);
+  --shadow-lift: 0 2px 4px rgba(6, 42, 51, 0.05), 0 30px 60px -20px rgba(6, 42, 51, 0.28);
+  --shadow-glow: 0 20px 60px -15px rgba(18, 167, 187, 0.45);
+
+  /* Custom animations exposed as utilities */
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-spin-slow: spin 26s linear infinite;
+  --animate-pulse-ring: pulseRing 3.2s ease-out infinite;
+  --animate-shimmer: shimmer 3.4s ease-in-out infinite;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-cream);
+  --foreground: var(--color-ink);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  border-color: rgba(6, 42, 51, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-ink);
+}
+
+/* Pretty scrollbar */
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-porcelain);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-300);
+  border-radius: 99px;
+  border: 3px solid var(--color-porcelain);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-500);
+}
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, var(--color-brand-600), var(--color-brand-400) 55%, var(--color-mint));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(100deg, var(--color-gold), var(--color-gold-soft));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(6, 42, 51, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(6, 42, 51, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.bg-radial-fade {
+  background: radial-gradient(80% 60% at 50% 0%, rgba(18, 167, 187, 0.14), transparent 70%);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-dark {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+.shadow-lift {
+  box-shadow: var(--shadow-lift);
+}
+.shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Animated gradient mesh for dark sections */
+.mesh-dark {
+  background:
+    radial-gradient(40% 50% at 15% 10%, rgba(18, 167, 187, 0.35), transparent 60%),
+    radial-gradient(45% 55% at 85% 20%, rgba(94, 231, 208, 0.18), transparent 60%),
+    radial-gradient(60% 70% at 70% 100%, rgba(242, 184, 75, 0.12), transparent 60%),
+    var(--color-deep);
+}
+
+/* Marquee */
+.marquee-track {
+  animation: marquee 32s linear infinite;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================================
+   Keyframes
+   ============================================================ */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-18px) rotate(2deg);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    transform: translateX(-130%) rotate(20deg);
+    opacity: 0;
+  }
+  45% {
+    opacity: 0.9;
+  }
+  55% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateX(230%) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+@keyframes drawSmile {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ============================================================
+   Accessibility — respect reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
