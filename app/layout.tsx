@@ -22,27 +22,27 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   title: {
-    default: "EuroDent — Kujdes Premium Stomatologjik",
+    default: "EuroDent — Premium Dental Care",
     template: "%s · EuroDent",
   },
   description:
-    "EuroDent është ekipi kryesor i stomatologëve në rajon, në Pejë, Kosovë — precizion evropian dhe stomatologji moderne e butë. Implante, estetikë, ortodonci dhe kujdes familjar.",
+    "EuroDent is the region's leading dental team in Peja, Kosovo — European precision and gentle, modern dentistry. Implants, cosmetic, orthodontics and family care.",
   keywords: [
-    "dentist Pejë",
-    "stomatolog Kosovë",
-    "klinikë dentare",
+    "dentist Peja",
+    "dentist Kosovo",
+    "dental clinic",
     "EuroDent",
-    "implante dentare",
-    "faseta",
-    "ortodonci",
-    "zbardhim dhëmbësh",
+    "dental implants",
+    "veneers",
+    "orthodontics",
+    "teeth whitening",
   ],
   openGraph: {
-    title: "EuroDent — Kujdes Premium Stomatologjik",
+    title: "EuroDent — Premium Dental Care",
     description:
-      "Ekipi më i mirë i stomatologëve në rajon. Precizion evropian, kujdes modern e i butë. Pejë, Kosovë.",
+      "The region's best dental team. European precision, gentle modern care. Peja, Kosovo.",
     type: "website",
-    locale: "sq_AL",
+    locale: "en_US",
   },
 };
 
@@ -53,7 +53,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="sq"
+      lang="en"
       className={`${jakarta.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink">

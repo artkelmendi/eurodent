@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import ServicesView from "@/components/views/ServicesView";
 
 export const metadata: Metadata = {
-  title: "Shërbimet & Trajtimet",
+  title: "Services & Treatments",
   description:
-    "Nga implantet dentare dhe fasetat te ortodoncia, zbardhimi dhe kujdesi familjar — shfletoni gamën e plotë të trajtimeve të EuroDent në Pejë, Kosovë.",
+    "From dental implants and veneers to orthodontics, whitening and family care — explore EuroDent's full range of treatments in Peja, Kosovo.",
 };
 
 export default function ServicesPage() {

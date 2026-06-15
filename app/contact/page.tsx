@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import ContactView from "@/components/views/ContactView";
 
 export const metadata: Metadata = {
-  title: "Rreth nesh & Kontakt",
+  title: "About & Contact",
   description:
-    "Njihuni me ekipin e EuroDent — Dr. Enver Berisha dhe Dr. Etrit Berisha — dhe caktoni vizitën tuaj. Orari, vendndodhja në Pejë, Kosovë dhe kontakti.",
+    "Meet the EuroDent team — Dr. Enver Berisha and Dr. Etrit Berisha — and book your visit. Hours, location in Peja, Kosovo, and contact details.",
 };
 
 export default function ContactPage() {

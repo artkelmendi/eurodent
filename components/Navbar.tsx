@@ -37,12 +37,12 @@ export default function Navbar() {
         className={`mx-auto flex max-w-6xl items-center justify-between rounded-full px-3 py-2 transition-all duration-300 sm:px-3.5 ${
           scrolled
             ? "glass shadow-lift ring-1 ring-brand-100"
-            : "bg-white/55 ring-1 ring-white/60 backdrop-blur-md"
+            : "bg-white/70 shadow-soft ring-1 ring-brand-100/70 backdrop-blur-md"
         }`}
       >
         <Link href="/" className="group flex items-center gap-2.5 pl-1.5" aria-label="EuroDent">
-          <span className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-xl bg-gradient-to-br from-brand-400 via-brand-500 to-brand-700 text-white shadow-glow transition-transform duration-300 group-hover:-rotate-6">
-            <ToothMark className="h-5 w-5" withShine />
+          <span className="relative grid h-9 w-9 place-items-center rounded-full bg-brand-50 text-brand-600 ring-1 ring-brand-100 transition-all duration-300 group-hover:-rotate-6 group-hover:bg-brand-100">
+            <ToothMark className="h-[1.15rem] w-[1.15rem]" />
           </span>
           <span className="text-lg font-extrabold tracking-tight text-ink">
             Euro<span className="text-gradient">Dent</span>
@@ -57,7 +57,7 @@ export default function Navbar() {
                 <Link
                   href={l.href}
                   className={`relative rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-200 ${
-                    active ? "text-white" : "text-ink-soft hover:text-ink"
+                    active ? "text-white" : "text-ink-soft hover:bg-brand-50 hover:text-ink"
                   }`}
                 >
                   {active && (

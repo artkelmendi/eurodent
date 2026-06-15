@@ -55,7 +55,7 @@ export default function ToothScene() {
         animate={reduce ? {} : { y: [0, -9, 0] }}
         transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
       >
-        <div className="relative h-[62%] w-[62%]">
+        <div className="relative h-[60%] w-[60%]">
           <svg
             viewBox="22 8 156 204"
             className="h-full w-full drop-shadow-[0_24px_40px_rgba(6,42,51,0.22)]"

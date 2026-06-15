@@ -21,8 +21,8 @@ const LanguageContext = createContext<Ctx | null>(null);
 const STORAGE_KEY = "eurodent-lang";
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Default Albanian — must match server render to avoid hydration mismatch.
-  const [lang, setLangState] = useState<Lang>("sq");
+  // Default English — must match server render to avoid hydration mismatch.
+  const [lang, setLangState] = useState<Lang>("en");
 
   useEffect(() => {
     const saved = window.localStorage.getItem(STORAGE_KEY);
