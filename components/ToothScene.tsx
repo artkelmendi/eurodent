@@ -52,12 +52,12 @@ export default function ToothScene() {
       {/* floating tooth */}
       <motion.div
         className="absolute inset-0 grid place-items-center"
-        animate={reduce ? {} : { y: [0, -9, 0] }}
+        animate={reduce ? {} : { y: [6, -6, 6] }}
         transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
       >
         <div className="relative h-[60%] w-[60%]">
           <svg
-            viewBox="22 8 156 204"
+            viewBox="12 -19.4 156 204"
             className="h-full w-full drop-shadow-[0_24px_40px_rgba(6,42,51,0.22)]"
             aria-label="A bright, healthy tooth"
             role="img"
