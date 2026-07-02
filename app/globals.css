@@ -313,6 +313,12 @@ body {
     transform: translateX(-50%);
   }
 }
+/* let readers pause the ticker by hovering it */
+.marquee-track:hover,
+.marquee-track-fast:hover,
+.marquee-track-reverse:hover {
+  animation-play-state: paused;
+}
 
 /* ============================================================
    Keyframes
