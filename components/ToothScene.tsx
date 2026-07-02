@@ -1,22 +1,50 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { useEffect } from "react";
 import { useLang } from "@/lib/i18n";
 
 /**
- * ToothScene — the hero centerpiece.
- * A glossy floating tooth with a sweeping shine, orbiting sparkles,
- * a slowly rotating dashed "care" ring, twinkling stars and a
- * self-drawing smile arc. Pure SVG + Framer Motion.
+ * ToothScene — the hero centerpiece, tuned for the dark cinematic hero.
+ * A glossy tooth that tilts in 3D toward the cursor, with a sweeping
+ * shine, orbiting beads, a rotating dashed "care" ring, twinkling
+ * sparkles and floating glass badges.
  */
 export default function ToothScene() {
   const reduce = useReducedMotion();
   const { t } = useLang();
 
+  // viewport-wide cursor parallax
+  const mx = useMotionValue(0.5);
+  const my = useMotionValue(0.5);
+  const rotateY = useSpring(useTransform(mx, [0, 1], [-10, 10]), { stiffness: 60, damping: 16 });
+  const rotateX = useSpring(useTransform(my, [0, 1], [8, -8]), { stiffness: 60, damping: 16 });
+  const shiftX = useSpring(useTransform(mx, [0, 1], [-14, 14]), { stiffness: 50, damping: 18 });
+  const shiftY = useSpring(useTransform(my, [0, 1], [-10, 10]), { stiffness: 50, damping: 18 });
+
+  useEffect(() => {
+    if (reduce) return;
+    const onMove = (e: MouseEvent) => {
+      mx.set(e.clientX / window.innerWidth);
+      my.set(e.clientY / window.innerHeight);
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => window.removeEventListener("mousemove", onMove);
+  }, [mx, my, reduce]);
+
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[460px]">
+    <motion.div
+      className="relative mx-auto aspect-square w-full max-w-[460px]"
+      style={reduce ? undefined : { rotateX, rotateY, transformStyle: "preserve-3d", transformPerspective: 1100 }}
+    >
       {/* soft glow backdrop */}
-      <div className="absolute inset-6 rounded-full bg-gradient-to-br from-brand-200/70 via-brand-100/40 to-mint/30 blur-2xl" />
+      <div className="absolute inset-6 rounded-full bg-gradient-to-br from-brand-500/40 via-brand-400/15 to-mint/20 blur-2xl" />
 
       {/* rotating dashed orbit */}
       <motion.div
@@ -30,8 +58,8 @@ export default function ToothScene() {
             cy="200"
             r="168"
             fill="none"
-            stroke="var(--color-brand-400)"
-            strokeOpacity="0.45"
+            stroke="var(--color-brand-300)"
+            strokeOpacity="0.5"
             strokeWidth="1.5"
             strokeDasharray="2 12"
             strokeLinecap="round"
@@ -39,26 +67,29 @@ export default function ToothScene() {
         </svg>
       </motion.div>
 
-      {/* counter-rotating inner orbit with a bead */}
+      {/* counter-rotating inner orbit with beads */}
       <motion.div
         className="absolute inset-10"
         animate={reduce ? {} : { rotate: -360 }}
         transition={{ duration: 26, ease: "linear", repeat: Infinity }}
       >
         <span className="absolute left-1/2 top-0 h-3 w-3 -translate-x-1/2 rounded-full bg-gold shadow-[0_0_12px_3px_rgba(242,184,75,0.6)]" />
-        <span className="absolute bottom-2 right-6 h-2 w-2 rounded-full bg-mint" />
+        <span className="absolute bottom-2 right-6 h-2 w-2 rounded-full bg-mint shadow-[0_0_10px_2px_rgba(94,231,208,0.6)]" />
       </motion.div>
 
-      {/* floating tooth */}
+      {/* floating tooth — parallax-shifted slightly more than the rings */}
       <motion.div
         className="absolute inset-0 grid place-items-center"
-        animate={reduce ? {} : { y: [6, -6, 6] }}
-        transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
+        style={reduce ? undefined : { x: shiftX, y: shiftY }}
       >
-        <div className="relative h-[60%] w-[60%]">
+        <motion.div
+          className="relative h-[60%] w-[60%]"
+          animate={reduce ? {} : { y: [6, -6, 6] }}
+          transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
+        >
           <svg
             viewBox="12 -19.4 156 204"
-            className="h-full w-full drop-shadow-[0_24px_40px_rgba(6,42,51,0.22)]"
+            className="h-full w-full drop-shadow-[0_30px_50px_rgba(0,0,0,0.5)]"
             aria-label="A bright, healthy tooth"
             role="img"
           >
@@ -135,17 +166,17 @@ export default function ToothScene() {
 
           {/* the classic 4-point sparkle on the tooth */}
           <Sparkle className="absolute right-[8%] top-[14%] h-7 w-7 text-white" delay={0.2} />
-        </div>
+        </motion.div>
       </motion.div>
 
       {/* twinkling stars around the scene */}
       <Sparkle className="absolute left-[6%] top-[24%] h-6 w-6 text-gold" delay={0} />
-      <Sparkle className="absolute right-[10%] bottom-[20%] h-8 w-8 text-brand-400" delay={1.1} />
+      <Sparkle className="absolute right-[10%] bottom-[20%] h-8 w-8 text-brand-300" delay={1.1} />
       <Sparkle className="absolute left-[18%] bottom-[12%] h-5 w-5 text-mint" delay={0.7} />
 
       {/* floating check badge */}
       <motion.div
-        className="absolute -right-1 top-[30%] flex items-center gap-2 rounded-full glass px-3 py-2 shadow-lift"
+        className="absolute -right-1 top-[30%] flex items-center gap-2 rounded-full glass-dark px-3 py-2 shadow-lift"
         initial={{ opacity: 0, scale: 0.7 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.9, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -155,17 +186,17 @@ export default function ToothScene() {
             <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
-        <span className="text-xs font-bold text-ink">{t.badges.painless}</span>
+        <span className="text-xs font-bold text-white">{t.badges.painless}</span>
       </motion.div>
 
       {/* floating rating badge */}
       <motion.div
-        className="absolute -left-2 bottom-[26%] flex items-center gap-2 rounded-full glass px-3 py-2 shadow-lift"
+        className="absolute -left-2 bottom-[26%] flex items-center gap-2 rounded-full glass-dark px-3 py-2 shadow-lift"
         initial={{ opacity: 0, scale: 0.7 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 1.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
-        <span className="text-sm font-extrabold text-ink">4.9</span>
+        <span className="text-sm font-extrabold text-white">4.9</span>
         <div className="flex">
           {Array.from({ length: 5 }).map((_, i) => (
             <svg key={i} viewBox="0 0 24 24" className="h-3.5 w-3.5 text-gold" fill="currentColor" aria-hidden="true">
@@ -174,7 +205,7 @@ export default function ToothScene() {
           ))}
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }
 

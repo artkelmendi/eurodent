@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 /* ============================================================
-   EuroDent — Design System
-   Premium dental practice. Deep teal + warm gold on porcelain.
+   EuroDent — Design System v2 "Cinematic Clinical"
+   Deep-ocean ink, aurora teal light, warm gold. Editorial
+   Fraunces display type over Plus Jakarta Sans.
    ============================================================ */
 
 @theme {
@@ -19,15 +20,15 @@
   --color-brand-900: #103f4c;
 
   /* Deep ink (text + dark sections) */
-  --color-ink: #062a33;
+  --color-ink: #052733;
   --color-ink-soft: #2c4d56;
   --color-ink-muted: #5b757d;
 
   /* Surfaces */
   --color-porcelain: #f4fafb;
   --color-cream: #fbfdfd;
-  --color-deep: #062a33;
-  --color-deep-2: #0a3a45;
+  --color-deep: #03181f;
+  --color-deep-2: #06303c;
 
   /* Accents */
   --color-gold: #f2b84b;
@@ -37,9 +38,10 @@
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
 
-  --shadow-soft: 0 1px 2px rgba(6, 42, 51, 0.04), 0 12px 30px -12px rgba(6, 42, 51, 0.18);
-  --shadow-lift: 0 2px 4px rgba(6, 42, 51, 0.05), 0 30px 60px -20px rgba(6, 42, 51, 0.28);
+  --shadow-soft: 0 1px 2px rgba(5, 39, 51, 0.04), 0 12px 30px -12px rgba(5, 39, 51, 0.18);
+  --shadow-lift: 0 2px 4px rgba(5, 39, 51, 0.05), 0 30px 60px -20px rgba(5, 39, 51, 0.28);
   --shadow-glow: 0 20px 60px -15px rgba(18, 167, 187, 0.45);
+  --shadow-gold: 0 16px 50px -12px rgba(242, 184, 75, 0.45);
 
   /* Custom animations exposed as utilities */
   --animate-float: float 7s ease-in-out infinite;
@@ -55,7 +57,7 @@
 }
 
 * {
-  border-color: rgba(6, 42, 51, 0.08);
+  border-color: rgba(5, 39, 51, 0.08);
 }
 
 html {
@@ -93,7 +95,7 @@ body {
 }
 
 /* ============================================================
-   Utilities
+   Typography helpers
    ============================================================ */
 
 .font-display {
@@ -108,6 +110,13 @@ body {
   color: transparent;
 }
 
+.text-gradient-light {
+  background: linear-gradient(100deg, var(--color-brand-300), var(--color-mint) 60%, var(--color-gold-soft));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .text-gradient-gold {
   background: linear-gradient(100deg, var(--color-gold), var(--color-gold-soft));
   -webkit-background-clip: text;
@@ -115,10 +124,31 @@ body {
   color: transparent;
 }
 
+/* Giant hollow watermark type (footer / CTA) */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.16);
+}
+.text-outline-ink {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(5, 39, 51, 0.14);
+}
+
+/* ============================================================
+   Surfaces & textures
+   ============================================================ */
+
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgba(6, 42, 51, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(6, 42, 51, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(5, 39, 51, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(5, 39, 51, 0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.bg-grid-light {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 
@@ -126,8 +156,14 @@ body {
   background: radial-gradient(80% 60% at 50% 0%, rgba(18, 167, 187, 0.14), transparent 70%);
 }
 
+/* Film-grain noise, keeps gradients from banding */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
 .glass {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(14px) saturate(150%);
   -webkit-backdrop-filter: blur(14px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.6);
@@ -158,7 +194,10 @@ body {
   box-shadow: var(--shadow-lift);
 }
 
-/* Animated gradient mesh for dark sections */
+/* ============================================================
+   Dark cinematic sections — aurora mesh
+   ============================================================ */
+
 .mesh-dark {
   background:
     radial-gradient(40% 50% at 15% 10%, rgba(18, 167, 187, 0.35), transparent 60%),
@@ -167,9 +206,107 @@ body {
     var(--color-deep);
 }
 
-/* Marquee */
+/* Slow drifting aurora blobs (used inside dark heroes).
+   Pure transform animation = GPU friendly. */
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform;
+  pointer-events: none;
+}
+.aurora-1 {
+  background: radial-gradient(circle, rgba(18, 167, 187, 0.55), transparent 65%);
+  animation: aurora1 24s ease-in-out infinite alternate;
+}
+.aurora-2 {
+  background: radial-gradient(circle, rgba(94, 231, 208, 0.35), transparent 65%);
+  animation: aurora2 30s ease-in-out infinite alternate;
+}
+.aurora-3 {
+  background: radial-gradient(circle, rgba(242, 184, 75, 0.22), transparent 65%);
+  animation: aurora3 36s ease-in-out infinite alternate;
+}
+
+@keyframes aurora1 {
+  0% {
+    transform: translate(-8%, -6%) scale(1);
+  }
+  50% {
+    transform: translate(14%, 10%) scale(1.25);
+  }
+  100% {
+    transform: translate(-4%, 16%) scale(0.95);
+  }
+}
+@keyframes aurora2 {
+  0% {
+    transform: translate(10%, 8%) scale(1.1);
+  }
+  50% {
+    transform: translate(-12%, -6%) scale(0.9);
+  }
+  100% {
+    transform: translate(6%, -14%) scale(1.3);
+  }
+}
+@keyframes aurora3 {
+  0% {
+    transform: translate(0%, 0%) scale(1);
+  }
+  100% {
+    transform: translate(-14%, 12%) scale(1.35);
+  }
+}
+
+/* Rotating conic "halo" ring for featured cards */
+.ring-conic {
+  position: relative;
+}
+.ring-conic::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--ring-angle, 0deg),
+    transparent 0%,
+    rgba(47, 198, 214, 0.9) 12%,
+    transparent 26%,
+    transparent 55%,
+    rgba(242, 184, 75, 0.8) 68%,
+    transparent 82%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: ringSpin 6s linear infinite;
+  pointer-events: none;
+}
+@property --ring-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes ringSpin {
+  to {
+    --ring-angle: 360deg;
+  }
+}
+
+/* ============================================================
+   Marquees
+   ============================================================ */
+
 .marquee-track {
   animation: marquee 32s linear infinite;
+}
+.marquee-track-fast {
+  animation: marquee 20s linear infinite;
+}
+.marquee-track-reverse {
+  animation: marquee 36s linear infinite reverse;
 }
 @keyframes marquee {
   to {
@@ -233,6 +370,25 @@ body {
   to {
     stroke-dashoffset: 0;
   }
+}
+
+/* Scroll-down mouse indicator */
+@keyframes scrollDot {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+.scroll-dot {
+  animation: scrollDot 1.8s ease-in-out infinite;
 }
 
 /* ============================================================

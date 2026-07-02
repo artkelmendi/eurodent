@@ -63,7 +63,7 @@ export default function ContactView() {
               as="h2"
               text={c.formTitle}
               highlight={c.formHighlight}
-              className="mt-4 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl"
+              className="mt-4 font-display text-3xl font-medium tracking-tight text-ink sm:text-5xl"
             />
             <Reveal delay={0.3} className="mt-4 max-w-md text-ink-soft">
               <p>{c.formIntro}</p>

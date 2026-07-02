@@ -106,6 +106,7 @@ export function AnimatedHeading({
   text,
   className,
   highlight,
+  highlightClass = "font-display italic text-gradient",
   delay = 0,
   as = "h1",
 }: {
@@ -113,6 +114,8 @@ export function AnimatedHeading({
   className?: string;
   /** words (case-insensitive) to render with the gradient treatment */
   highlight?: string[];
+  /** classes applied to highlighted words */
+  highlightClass?: string;
   delay?: number;
   as?: "h1" | "h2" | "h3";
 }) {
@@ -140,7 +143,7 @@ export function AnimatedHeading({
             className="inline-block overflow-hidden align-bottom pb-[0.12em] -mb-[0.12em]"
           >
             <motion.span
-              className={`inline-block ${isHl ? "font-display italic text-gradient" : ""}`}
+              className={`inline-block ${isHl ? highlightClass : ""}`}
               variants={{
                 hidden: { y: reduce ? 0 : "110%", opacity: reduce ? 0 : 1 },
                 show: {

@@ -56,10 +56,13 @@ export default function ServicesView() {
       </section>
 
       {/* Process band */}
-      <section className="relative mx-5 my-12 overflow-hidden rounded-[2rem] mesh-dark px-5 py-16 text-white sm:py-20">
-        <div className="mx-auto max-w-6xl">
+      <section className="relative mx-5 my-12 overflow-hidden rounded-[2.5rem] bg-deep px-5 py-16 text-white sm:py-20">
+        <div className="aurora-blob aurora-1 left-[-8%] top-[-15%] h-80 w-80" />
+        <div className="aurora-blob aurora-3 bottom-[-15%] right-[-6%] h-80 w-80" />
+        <div className="pointer-events-none absolute inset-0 bg-noise opacity-[0.05]" />
+        <div className="relative mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-200">
+            <span className="inline-block rounded-full glass-dark px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-200">
               {sp.approachEyebrow}
             </span>
             <AnimatedHeading
@@ -67,7 +70,8 @@ export default function ServicesView() {
               as="h2"
               text={sp.approachTitle}
               highlight={sp.approachHighlight}
-              className="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl"
+              highlightClass="italic text-gradient-light"
+              className="mt-4 font-display text-3xl font-medium tracking-tight sm:text-5xl"
             />
           </div>
           <Stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -110,7 +114,7 @@ export default function ServicesView() {
             as="h2"
             text={sp.faqTitle}
             highlight={sp.faqHighlight}
-            className="mt-4 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl"
+            className="mt-4 font-display text-3xl font-medium tracking-tight text-ink sm:text-5xl"
           />
         </div>
         <Faq items={t.faqs} />

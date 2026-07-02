@@ -23,8 +23,11 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative mt-24 overflow-hidden mesh-dark text-white">
-      <div className="mx-auto max-w-6xl px-5 py-16">
+    <footer className="relative mt-24 overflow-hidden bg-deep text-white">
+      <div className="aurora-blob aurora-1 left-[-8%] top-[-20%] h-96 w-96 opacity-60" />
+      <div className="aurora-blob aurora-3 bottom-[10%] right-[-8%] h-80 w-80 opacity-60" />
+      <div className="pointer-events-none absolute inset-0 bg-noise opacity-[0.05]" />
+      <div className="relative mx-auto max-w-6xl px-5 py-16">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <Link href="/" className="flex items-center gap-2.5">
@@ -93,7 +96,14 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row">
+        {/* giant watermark wordmark */}
+        <div className="pointer-events-none mt-14 select-none overflow-hidden" aria-hidden="true">
+          <p className="whitespace-nowrap text-center font-display text-[17vw] font-semibold leading-[0.85] text-outline sm:text-[10rem] lg:text-[13rem]">
+            EuroDent
+          </p>
+        </div>
+
+        <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/50 sm:flex-row">
           <p>© {new Date().getFullYear()} EuroDent. {t.footer.rights}</p>
           <p>
             {t.footer.crafted} · <span className="text-white/70">{t.footer.privacy}</span> ·{" "}

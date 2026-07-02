@@ -34,6 +34,17 @@ type Content = {
     ctaPrimary: string;
     ctaSecondary: string;
     reviews: string;
+    scroll: string;
+  };
+  beforeAfter: {
+    eyebrow: string;
+    title: string;
+    highlight: string[];
+    subtitle: string;
+    before: string;
+    after: string;
+    hint: string;
+    caption: string;
   };
   badges: { painless: string };
   marquee: string[];
@@ -140,6 +151,18 @@ export const dict: Record<Lang, Content> = {
       ctaPrimary: "Cakto vizitën tënde",
       ctaSecondary: "Shiko trajtimet",
       reviews: "nga 2.300+ vlerësime",
+      scroll: "Lëviz poshtë",
+    },
+    beforeAfter: {
+      eyebrow: "Transformime reale",
+      title: "Rrëshqit për ta parë ndryshimin",
+      highlight: ["ndryshimin"],
+      subtitle:
+        "Zvarrit ndarësen dhe shiko si duket një buzëqeshje EuroDent — nga e zbehtë dhe e lodhur, në të ndritshme e të shëndetshme.",
+      before: "Para",
+      after: "Pas",
+      hint: "Zvarrit",
+      caption: "Dizajn buzëqeshjeje · Faseta porcelani & zbardhim profesional",
     },
     badges: { painless: "Pa dhimbje" },
     marquee: [
@@ -289,6 +312,18 @@ export const dict: Record<Lang, Content> = {
       ctaPrimary: "Book your visit",
       ctaSecondary: "Explore treatments",
       reviews: "from 2,300+ reviews",
+      scroll: "Scroll to explore",
+    },
+    beforeAfter: {
+      eyebrow: "Real transformations",
+      title: "Slide to see the difference",
+      highlight: ["difference"],
+      subtitle:
+        "Drag the divider to see what a EuroDent smile looks like — from dull and tired to bright, aligned and healthy.",
+      before: "Before",
+      after: "After",
+      hint: "Drag",
+      caption: "Smile design · Porcelain veneers & professional whitening",
     },
     badges: { painless: "Painless care" },
     marquee: [
